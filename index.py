@@ -21,7 +21,7 @@ SMTP_HOST = "smtp.qq.com"
 SMTP_PORT = 587
 SMTP_USER = "1511404091@qq.com"
 SMTP_PASSWORD = "iwzwcypzvwcnjgeg"
-TO_EMAIL = "1511404091@qq.com"
+TO_EMAIL = "A1980123qwe@outlook.com"
 
 STOP_LOSS_PCT = -0.05
 TAKE_PROFIT_PCT = 0.10
