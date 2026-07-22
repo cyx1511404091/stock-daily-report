@@ -366,3 +366,7 @@ def main_handler(event, context):
     }
     print("完成: " + json.dumps(result, ensure_ascii=False))
     return result
+
+
+if __name__ == "__main__":
+    main_handler(None, None)
