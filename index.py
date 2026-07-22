@@ -50,7 +50,12 @@ WATCHLIST = {
     "603259": {"name": "药明康德", "sector": "CXO"},
 }
 
-ACCOUNT_KEY = "/tmp/stock-account.json"
+# GitHub Actions 环境：存在仓库目录；云函数环境：存在 /tmp
+ACCOUNT_KEY = os.environ.get("ACCOUNT_FILE", 
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "stock-account.json"))
+# 如果当前目录不可写（如云函数），回退到 /tmp
+if not os.access(os.path.dirname(ACCOUNT_KEY), os.W_OK):
+    ACCOUNT_KEY = "/tmp/stock-account.json"
 
 
 # ===== 持久化 =====

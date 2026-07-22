@@ -1,0 +1,36 @@
+name: 模拟投资每日财报
+
+on:
+  schedule:
+    # 每天北京时间 8:00 (UTC 0:00)
+    - cron: "0 0 * * *"
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  daily-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 设置Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 运行每日财报
+        run: python index.py
+
+      - name: 提交账户状态
+        run: |
+          git config user.name "stock-bot"
+          git config user.email "1511404091@qq.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "无变更"
+          else
+            git commit -m "每日财报更新 $(date +%Y-%m-%d)"
+            git push
+          fi
